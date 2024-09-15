@@ -220,6 +220,28 @@ interface Linguagem {
 		}
 	}
 
+	class ExpDiv extends OpBin<Expressao> implements Expressao{
+		ExpDiv(Expressao esq, Expressao dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public int getValor() {
+			return esq.getValor() / dir.getValor();
+		}
+	}
+
+	class ExpExpn extends OpBin<Expressao> implements Expressao{
+		ExpExpn(Expressao esq, Expressao dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public int getValor() {
+			return esq.getValor() ^ dir.getValor();
+		}
+	}
+
 	class Booleano implements Bool {
 		private final boolean valor;
 

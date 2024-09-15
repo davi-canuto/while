@@ -19,8 +19,8 @@ public class EnquantoParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, BOOLEANO=23, INT=24, 
-		ID=25, TEXTO=26, Comentario=27, Espaco=28;
+		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
+		BOOLEANO=25, INT=26, ID=27, TEXTO=28, Comentario=29, Espaco=30;
 	public static final int
 		RULE_programa = 0, RULE_seqComando = 1, RULE_comando = 2, RULE_expressao = 3, 
 		RULE_booleano = 4;
@@ -34,16 +34,16 @@ public class EnquantoParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "';'", "':='", "'skip'", "'se'", "'entao'", "'senao'", "'enquanto'", 
-			"'faca'", "'exiba'", "'escreva'", "'{'", "'}'", "'leia'", "'*'", "'+'", 
-			"'-'", "'('", "')'", "'='", "'<='", "'nao'", "'e'"
+			"'faca'", "'exiba'", "'escreva'", "'{'", "'}'", "'leia'", "'*'", "'^'", 
+			"'+'", "'-'", "'/'", "'('", "')'", "'='", "'<='", "'nao'", "'e'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null, null, null, null, "BOOLEANO", 
-			"INT", "ID", "TEXTO", "Comentario", "Espaco"
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, "BOOLEANO", "INT", "ID", "TEXTO", "Comentario", "Espaco"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -557,17 +557,17 @@ public class EnquantoParser extends Parser {
 				match(ID);
 				}
 				break;
-			case T__16:
+			case T__18:
 				{
 				_localctx = new ExpParContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(50);
-				match(T__16);
+				match(T__18);
 				setState(51);
 				expressao(0);
 				setState(52);
-				match(T__17);
+				match(T__19);
 				}
 				break;
 			default:
@@ -592,7 +592,15 @@ public class EnquantoParser extends Parser {
 						setState(56);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(57);
-						match(T__13);
+						_la = _input.LA(1);
+						if ( !(_la==T__13 || _la==T__14) ) {
+						_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
 						setState(58);
 						expressao(4);
 						}
@@ -605,7 +613,7 @@ public class EnquantoParser extends Parser {
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 						setState(60);
 						_la = _input.LA(1);
-						if ( !(_la==T__14 || _la==T__15) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 458752L) != 0)) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -765,7 +773,7 @@ public class EnquantoParser extends Parser {
 				setState(69);
 				expressao(0);
 				setState(70);
-				match(T__18);
+				match(T__20);
 				setState(71);
 				expressao(0);
 				}
@@ -778,7 +786,7 @@ public class EnquantoParser extends Parser {
 				setState(73);
 				expressao(0);
 				setState(74);
-				match(T__19);
+				match(T__21);
 				setState(75);
 				expressao(0);
 				}
@@ -789,7 +797,7 @@ public class EnquantoParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(77);
-				match(T__20);
+				match(T__22);
 				setState(78);
 				booleano(3);
 				}
@@ -800,11 +808,11 @@ public class EnquantoParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(79);
-				match(T__16);
+				match(T__18);
 				setState(80);
 				booleano(0);
 				setState(81);
-				match(T__17);
+				match(T__19);
 				}
 				break;
 			}
@@ -823,7 +831,7 @@ public class EnquantoParser extends Parser {
 					setState(85);
 					if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 					setState(86);
-					match(T__21);
+					match(T__23);
 					setState(87);
 					booleano(3);
 					}
@@ -873,7 +881,7 @@ public class EnquantoParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u001c^\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u001e^\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0001"+
 		"\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0005\u0001\u0010"+
 		"\b\u0001\n\u0001\f\u0001\u0013\t\u0001\u0001\u0002\u0001\u0002\u0001\u0002"+
@@ -889,48 +897,49 @@ public class EnquantoParser extends Parser {
 		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0003\u0004"+
 		"T\b\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0005\u0004Y\b\u0004\n\u0004"+
 		"\f\u0004\\\t\u0004\u0001\u0004\u0000\u0002\u0006\b\u0005\u0000\u0002\u0004"+
-		"\u0006\b\u0000\u0001\u0001\u0000\u000f\u0010i\u0000\n\u0001\u0000\u0000"+
-		"\u0000\u0002\f\u0001\u0000\u0000\u0000\u0004,\u0001\u0000\u0000\u0000"+
-		"\u00066\u0001\u0000\u0000\u0000\bS\u0001\u0000\u0000\u0000\n\u000b\u0003"+
-		"\u0002\u0001\u0000\u000b\u0001\u0001\u0000\u0000\u0000\f\u0011\u0003\u0004"+
-		"\u0002\u0000\r\u000e\u0005\u0001\u0000\u0000\u000e\u0010\u0003\u0004\u0002"+
-		"\u0000\u000f\r\u0001\u0000\u0000\u0000\u0010\u0013\u0001\u0000\u0000\u0000"+
-		"\u0011\u000f\u0001\u0000\u0000\u0000\u0011\u0012\u0001\u0000\u0000\u0000"+
-		"\u0012\u0003\u0001\u0000\u0000\u0000\u0013\u0011\u0001\u0000\u0000\u0000"+
-		"\u0014\u0015\u0005\u0019\u0000\u0000\u0015\u0016\u0005\u0002\u0000\u0000"+
-		"\u0016-\u0003\u0006\u0003\u0000\u0017-\u0005\u0003\u0000\u0000\u0018\u0019"+
-		"\u0005\u0004\u0000\u0000\u0019\u001a\u0003\b\u0004\u0000\u001a\u001b\u0005"+
-		"\u0005\u0000\u0000\u001b\u001c\u0003\u0004\u0002\u0000\u001c\u001d\u0005"+
-		"\u0006\u0000\u0000\u001d\u001e\u0003\u0004\u0002\u0000\u001e-\u0001\u0000"+
-		"\u0000\u0000\u001f \u0005\u0007\u0000\u0000 !\u0003\b\u0004\u0000!\"\u0005"+
-		"\b\u0000\u0000\"#\u0003\u0004\u0002\u0000#-\u0001\u0000\u0000\u0000$%"+
-		"\u0005\t\u0000\u0000%-\u0005\u001a\u0000\u0000&\'\u0005\n\u0000\u0000"+
-		"\'-\u0003\u0006\u0003\u0000()\u0005\u000b\u0000\u0000)*\u0003\u0002\u0001"+
-		"\u0000*+\u0005\f\u0000\u0000+-\u0001\u0000\u0000\u0000,\u0014\u0001\u0000"+
-		"\u0000\u0000,\u0017\u0001\u0000\u0000\u0000,\u0018\u0001\u0000\u0000\u0000"+
-		",\u001f\u0001\u0000\u0000\u0000,$\u0001\u0000\u0000\u0000,&\u0001\u0000"+
-		"\u0000\u0000,(\u0001\u0000\u0000\u0000-\u0005\u0001\u0000\u0000\u0000"+
-		"./\u0006\u0003\uffff\uffff\u0000/7\u0005\u0018\u0000\u000007\u0005\r\u0000"+
-		"\u000017\u0005\u0019\u0000\u000023\u0005\u0011\u0000\u000034\u0003\u0006"+
-		"\u0003\u000045\u0005\u0012\u0000\u000057\u0001\u0000\u0000\u00006.\u0001"+
-		"\u0000\u0000\u000060\u0001\u0000\u0000\u000061\u0001\u0000\u0000\u0000"+
-		"62\u0001\u0000\u0000\u00007@\u0001\u0000\u0000\u000089\n\u0003\u0000\u0000"+
-		"9:\u0005\u000e\u0000\u0000:?\u0003\u0006\u0003\u0004;<\n\u0002\u0000\u0000"+
-		"<=\u0007\u0000\u0000\u0000=?\u0003\u0006\u0003\u0003>8\u0001\u0000\u0000"+
-		"\u0000>;\u0001\u0000\u0000\u0000?B\u0001\u0000\u0000\u0000@>\u0001\u0000"+
-		"\u0000\u0000@A\u0001\u0000\u0000\u0000A\u0007\u0001\u0000\u0000\u0000"+
-		"B@\u0001\u0000\u0000\u0000CD\u0006\u0004\uffff\uffff\u0000DT\u0005\u0017"+
-		"\u0000\u0000EF\u0003\u0006\u0003\u0000FG\u0005\u0013\u0000\u0000GH\u0003"+
-		"\u0006\u0003\u0000HT\u0001\u0000\u0000\u0000IJ\u0003\u0006\u0003\u0000"+
-		"JK\u0005\u0014\u0000\u0000KL\u0003\u0006\u0003\u0000LT\u0001\u0000\u0000"+
-		"\u0000MN\u0005\u0015\u0000\u0000NT\u0003\b\u0004\u0003OP\u0005\u0011\u0000"+
-		"\u0000PQ\u0003\b\u0004\u0000QR\u0005\u0012\u0000\u0000RT\u0001\u0000\u0000"+
-		"\u0000SC\u0001\u0000\u0000\u0000SE\u0001\u0000\u0000\u0000SI\u0001\u0000"+
-		"\u0000\u0000SM\u0001\u0000\u0000\u0000SO\u0001\u0000\u0000\u0000TZ\u0001"+
-		"\u0000\u0000\u0000UV\n\u0002\u0000\u0000VW\u0005\u0016\u0000\u0000WY\u0003"+
-		"\b\u0004\u0003XU\u0001\u0000\u0000\u0000Y\\\u0001\u0000\u0000\u0000ZX"+
-		"\u0001\u0000\u0000\u0000Z[\u0001\u0000\u0000\u0000[\t\u0001\u0000\u0000"+
-		"\u0000\\Z\u0001\u0000\u0000\u0000\u0007\u0011,6>@SZ";
+		"\u0006\b\u0000\u0002\u0001\u0000\u000e\u000f\u0001\u0000\u0010\u0012i"+
+		"\u0000\n\u0001\u0000\u0000\u0000\u0002\f\u0001\u0000\u0000\u0000\u0004"+
+		",\u0001\u0000\u0000\u0000\u00066\u0001\u0000\u0000\u0000\bS\u0001\u0000"+
+		"\u0000\u0000\n\u000b\u0003\u0002\u0001\u0000\u000b\u0001\u0001\u0000\u0000"+
+		"\u0000\f\u0011\u0003\u0004\u0002\u0000\r\u000e\u0005\u0001\u0000\u0000"+
+		"\u000e\u0010\u0003\u0004\u0002\u0000\u000f\r\u0001\u0000\u0000\u0000\u0010"+
+		"\u0013\u0001\u0000\u0000\u0000\u0011\u000f\u0001\u0000\u0000\u0000\u0011"+
+		"\u0012\u0001\u0000\u0000\u0000\u0012\u0003\u0001\u0000\u0000\u0000\u0013"+
+		"\u0011\u0001\u0000\u0000\u0000\u0014\u0015\u0005\u001b\u0000\u0000\u0015"+
+		"\u0016\u0005\u0002\u0000\u0000\u0016-\u0003\u0006\u0003\u0000\u0017-\u0005"+
+		"\u0003\u0000\u0000\u0018\u0019\u0005\u0004\u0000\u0000\u0019\u001a\u0003"+
+		"\b\u0004\u0000\u001a\u001b\u0005\u0005\u0000\u0000\u001b\u001c\u0003\u0004"+
+		"\u0002\u0000\u001c\u001d\u0005\u0006\u0000\u0000\u001d\u001e\u0003\u0004"+
+		"\u0002\u0000\u001e-\u0001\u0000\u0000\u0000\u001f \u0005\u0007\u0000\u0000"+
+		" !\u0003\b\u0004\u0000!\"\u0005\b\u0000\u0000\"#\u0003\u0004\u0002\u0000"+
+		"#-\u0001\u0000\u0000\u0000$%\u0005\t\u0000\u0000%-\u0005\u001c\u0000\u0000"+
+		"&\'\u0005\n\u0000\u0000\'-\u0003\u0006\u0003\u0000()\u0005\u000b\u0000"+
+		"\u0000)*\u0003\u0002\u0001\u0000*+\u0005\f\u0000\u0000+-\u0001\u0000\u0000"+
+		"\u0000,\u0014\u0001\u0000\u0000\u0000,\u0017\u0001\u0000\u0000\u0000,"+
+		"\u0018\u0001\u0000\u0000\u0000,\u001f\u0001\u0000\u0000\u0000,$\u0001"+
+		"\u0000\u0000\u0000,&\u0001\u0000\u0000\u0000,(\u0001\u0000\u0000\u0000"+
+		"-\u0005\u0001\u0000\u0000\u0000./\u0006\u0003\uffff\uffff\u0000/7\u0005"+
+		"\u001a\u0000\u000007\u0005\r\u0000\u000017\u0005\u001b\u0000\u000023\u0005"+
+		"\u0013\u0000\u000034\u0003\u0006\u0003\u000045\u0005\u0014\u0000\u0000"+
+		"57\u0001\u0000\u0000\u00006.\u0001\u0000\u0000\u000060\u0001\u0000\u0000"+
+		"\u000061\u0001\u0000\u0000\u000062\u0001\u0000\u0000\u00007@\u0001\u0000"+
+		"\u0000\u000089\n\u0003\u0000\u00009:\u0007\u0000\u0000\u0000:?\u0003\u0006"+
+		"\u0003\u0004;<\n\u0002\u0000\u0000<=\u0007\u0001\u0000\u0000=?\u0003\u0006"+
+		"\u0003\u0003>8\u0001\u0000\u0000\u0000>;\u0001\u0000\u0000\u0000?B\u0001"+
+		"\u0000\u0000\u0000@>\u0001\u0000\u0000\u0000@A\u0001\u0000\u0000\u0000"+
+		"A\u0007\u0001\u0000\u0000\u0000B@\u0001\u0000\u0000\u0000CD\u0006\u0004"+
+		"\uffff\uffff\u0000DT\u0005\u0019\u0000\u0000EF\u0003\u0006\u0003\u0000"+
+		"FG\u0005\u0015\u0000\u0000GH\u0003\u0006\u0003\u0000HT\u0001\u0000\u0000"+
+		"\u0000IJ\u0003\u0006\u0003\u0000JK\u0005\u0016\u0000\u0000KL\u0003\u0006"+
+		"\u0003\u0000LT\u0001\u0000\u0000\u0000MN\u0005\u0017\u0000\u0000NT\u0003"+
+		"\b\u0004\u0003OP\u0005\u0013\u0000\u0000PQ\u0003\b\u0004\u0000QR\u0005"+
+		"\u0014\u0000\u0000RT\u0001\u0000\u0000\u0000SC\u0001\u0000\u0000\u0000"+
+		"SE\u0001\u0000\u0000\u0000SI\u0001\u0000\u0000\u0000SM\u0001\u0000\u0000"+
+		"\u0000SO\u0001\u0000\u0000\u0000TZ\u0001\u0000\u0000\u0000UV\n\u0002\u0000"+
+		"\u0000VW\u0005\u0018\u0000\u0000WY\u0003\b\u0004\u0003XU\u0001\u0000\u0000"+
+		"\u0000Y\\\u0001\u0000\u0000\u0000ZX\u0001\u0000\u0000\u0000Z[\u0001\u0000"+
+		"\u0000\u0000[\t\u0001\u0000\u0000\u0000\\Z\u0001\u0000\u0000\u0000\u0007"+
+		"\u0011,6>@SZ";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

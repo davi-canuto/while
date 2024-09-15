@@ -103,6 +103,8 @@ public class Regras extends EnquantoBaseListener {
 		final Expressao exp = switch (op) {
 			case "*" -> new ExpMult(esq, dir);
 			case "-" -> new ExpSub(esq, dir);
+			case "/" -> new ExpDiv(esq, dir);
+			case "^" -> new ExpExpn(esq, dir);
 			default  -> new ExpSoma(esq, dir);
 		};
 		valores.insira(ctx, exp);
