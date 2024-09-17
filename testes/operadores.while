@@ -1,0 +1,11 @@
+se 2 >= 2 entao exiba "primeira"
+senao exiba "erronaprimeira";
+
+se 2 <= 2 entao exiba "segunda"
+senao exiba "erronasegunda";
+
+se 1 < 2 entao exiba "terceira"
+senao exiba "erronaterceira";
+
+se 2 > 1 entao exiba "quarta"
+senao exiba "erronaquarta";

@@ -277,6 +277,39 @@ interface Linguagem {
 			return esq.getValor() <= dir.getValor();
 		}
 	}
+	
+	class ExpMaiorIgual extends OpBin<Expressao> implements Bool {
+		ExpMaiorIgual(Expressao esq, Expressao dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() >= dir.getValor();
+		}
+	}
+	
+	class ExpMaiorQue extends OpBin<Expressao> implements Bool {
+		ExpMaiorQue(Expressao esq, Expressao dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() > dir.getValor();
+		}
+	}
+
+	class ExpMenorQue extends OpBin<Expressao> implements Bool {
+		ExpMenorQue(Expressao esq, Expressao dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() < dir.getValor();
+		}
+	}
 
 	class NaoLogico extends OpUnaria<Bool> implements Bool{
 		NaoLogico(Bool operando) {

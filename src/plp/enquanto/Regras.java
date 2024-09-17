@@ -135,7 +135,7 @@ public class Regras extends EnquantoBaseListener {
 	public void exitOuExclusivoLogico(OuExclusivoLogicoContext ctx) {
 		final Bool esq = valores.pegue(ctx.booleano(0));
 		final Bool dir = valores.pegue(ctx.booleano(1));
-		valores.insira(ctx, new OuExc4lusivoLogico(esq, dir));
+		valores.insira(ctx, new OuExclusivoLogico(esq, dir));
 	}
 
 	@Override
@@ -171,9 +171,9 @@ public class Regras extends EnquantoBaseListener {
 		final Bool exp = switch (op) {
 			case "="  -> new ExpIgual(esq, dir);
 			case "<=" -> new ExpMenorIgual(esq, dir);
-			// case ">=" -> new ExpMaiorIgual(esq, dir);
-			// case ">" -> new ExpMaior(esq, dir);
-			// case "<" -> new ExpMenor(esq, dir);
+			case ">=" -> new ExpMaiorIgual(esq, dir);
+			case ">" -> new ExpMaiorQue(esq, dir);
+			case "<" -> new ExpMenorQue(esq, dir);
 			default   -> new ExpIgual(esq, esq);
 		};
 		valores.insira(ctx, exp);
