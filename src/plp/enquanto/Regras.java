@@ -123,6 +123,20 @@ public class Regras extends EnquantoBaseListener {
 		final Bool dir = valores.pegue(ctx.booleano(1));
 		valores.insira(ctx, new ELogico(esq, dir));
 	}
+	
+	@Override
+	public void exitOuLogico(OuLogicoContext ctx) {
+		final Bool esq = valores.pegue(ctx.booleano(0));
+		final Bool dir = valores.pegue(ctx.booleano(1));
+		valores.insira(ctx, new OuLogico(esq, dir));
+	}
+
+	@Override
+	public void exitOuExclusivoLogico(OuExclusivoLogicoContext ctx) {
+		final Bool esq = valores.pegue(ctx.booleano(0));
+		final Bool dir = valores.pegue(ctx.booleano(1));
+		valores.insira(ctx, new OuExc4lusivoLogico(esq, dir));
+	}
 
 	@Override
 	public void exitBoolPar(BoolParContext ctx) {
