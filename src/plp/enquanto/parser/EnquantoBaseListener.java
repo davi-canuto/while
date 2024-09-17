@@ -125,6 +125,30 @@ public class EnquantoBaseListener implements EnquantoListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPara(EnquantoParser.ParaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPara(EnquantoParser.ParaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDefFuncao(EnquantoParser.DefFuncaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDefFuncao(EnquantoParser.DefFuncaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLeia(EnquantoParser.LeiaContext ctx) { }
 	/**
 	 * {@inheritDoc}
