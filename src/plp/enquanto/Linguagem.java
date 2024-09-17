@@ -238,7 +238,8 @@ interface Linguagem {
 
 		@Override
 		public int getValor() {
-			return esq.getValor() ^ dir.getValor();
+			double data = Math.pow(esq.getValor(), dir.getValor());	
+			return (int)data;
 		}
 	}
 
@@ -296,6 +297,28 @@ interface Linguagem {
 		@Override
 		public boolean getValor() {
 			return esq.getValor() && dir.getValor();
+		}
+	}
+	
+	class OuLogico extends OpBin<Bool> implements Bool{
+		OuLogico(Bool esq, Bool dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() || dir.getValor();
+		}
+	}
+
+	class OuExclusivoLogico extends OpBin<Bool> implements Bool{
+		OuExclusivoLogico(Bool esq, Bool dir) {
+			super(esq, dir);
+		}
+
+		@Override
+		public boolean getValor() {
+			return esq.getValor() ^ dir.getValor();
 		}
 	}
 }
