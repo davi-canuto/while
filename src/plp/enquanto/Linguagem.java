@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Collections;
 
 interface Linguagem {
 	Map<String, Integer> ambiente = new HashMap<>();
@@ -35,24 +39,63 @@ interface Linguagem {
 	}
 
 	class Se implements Comando {
-		private final Bool condicao;
-		private final Comando entao;
-		private final Comando senao;
+		private Bool condicao;
+		private Comando entao;
+		private Comando senao;
+		private Map<Bool, Comando> senaoses;
 
-		public Se(Bool condicao, Comando entao, Comando senao) {
+		public Se(Bool condicao, Comando entao, Map<Bool, Comando> senaoses, Comando senao) {
 			this.condicao = condicao;
 			this.entao = entao;
 			this.senao = senao;
+			this.senaoses = senaoses;
 		}
 
 		@Override
 		public void execute() {
-			if (condicao.getValor())
+			if (condicao.getValor()) {
 				entao.execute();
-			else
+			} else {
+				Iterator<Bool> condicoes = senaoses.keySet().iterator();
+				while (condicoes.hasNext()) {
+					Bool senaose_condicao = condicoes.next();
+					if (senaose_condicao.getValor()) {
+						senaoses.get(senaose_condicao).execute();
+						return;
+					}
+				}
+				
 				senao.execute();
+			}
 		}
 	}
+
+	class AtribuicaoComDeclaracao implements Comando {
+		private final List<String> ids;
+		private final List<Expressao> expressoes;
+
+		AtribuicaoComDeclaracao(List<String> ids, List<Expressao> expressoes) {
+			this.ids = ids;
+			this.expressoes = expressoes;
+		}
+
+		@Override
+		public void execute() {
+			if (ids.size() != expressoes.size()) {
+				throw new RuntimeException("Número de identificadores difere da quantidade de expressões.");
+			}
+
+			Set<String> idsUnicos = new HashSet<>(ids);
+			if (idsUnicos.size() != ids.size()) {
+				throw new RuntimeException("Identificador já existe no contexto.");
+			}
+
+			for (int i = 0; i < ids.size(); i++) {
+				ambiente.put(ids.get(i), expressoes.get(i).getValor());
+			}
+		}
+	}
+
 
 	Skip skip = new Skip();
 	class Skip implements Comando {
@@ -342,6 +385,74 @@ interface Linguagem {
 		public boolean getValor() {
 			return esq.getValor() || dir.getValor();
 		}
+	}
+
+	class Para implements Comando {
+		private final String id;
+		private final Expressao startExpr;
+			private final Expressao endExpr;
+			private final Comando comando;
+
+			public Para(String id, Expressao startExpr, Expressao endExpr, Comando comando) {
+		this.id = id;
+				this.startExpr = startExpr;
+				this.endExpr = endExpr;
+				this.comando = comando;
+			}
+
+		 @Override
+        public void execute() {
+					int start = startExpr.getValor();
+					int end = endExpr.getValor();
+			for (int i = start; i < end; i++) {
+				ambiente.put(id, i);
+				comando.execute();
+			}
+		}	
+	}
+
+	class Repita implements Comando {
+		private final Expressao expressao;
+		private final Comando comando;
+
+		public Repita(Expressao expressao, Comando comando) {
+			this.expressao = expressao;
+			this.comando = comando;
+		}
+
+		@Override
+		public void execute() {
+			int i = 0;
+			while (i < expressao.getValor()) {
+				comando.execute();
+				i++;
+			}
+		}
+	}
+
+	class Escolha implements Comando {
+		private Id entrada;
+        private Map<Expressao, Comando> comandos;
+        private Comando saidaPadrao;
+
+		public Escolha(Id entrada, Map<Expressao, Comando> comandos, Comando saidaPadrao) {
+			this.entrada = entrada;
+			this.comandos = comandos;
+			this.saidaPadrao = saidaPadrao;
+		}
+		
+		@Override
+		public void execute() {
+			int valor = entrada.getValor();
+			for (Expressao exp : comandos.keySet()) {
+				if (exp.getValor() == valor) {
+					comandos.get(exp).execute();
+					return;
+				}
+			}
+			saidaPadrao.execute();
+		}
+		
 	}
 
 	class OuExclusivoLogico extends OpBin<Bool> implements Bool{

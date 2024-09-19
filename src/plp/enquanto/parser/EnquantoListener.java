@@ -40,6 +40,18 @@ public interface EnquantoListener extends ParseTreeListener {
 	 */
 	void exitAtribuicao(EnquantoParser.AtribuicaoContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code atribuicaoComDeclaracao}
+	 * labeled alternative in {@link EnquantoParser#comando}.
+	 * @param ctx the parse tree
+	 */
+	void enterAtribuicaoComDeclaracao(EnquantoParser.AtribuicaoComDeclaracaoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code atribuicaoComDeclaracao}
+	 * labeled alternative in {@link EnquantoParser#comando}.
+	 * @param ctx the parse tree
+	 */
+	void exitAtribuicaoComDeclaracao(EnquantoParser.AtribuicaoComDeclaracaoContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code skip}
 	 * labeled alternative in {@link EnquantoParser#comando}.
 	 * @param ctx the parse tree
@@ -124,17 +136,29 @@ public interface EnquantoListener extends ParseTreeListener {
 	 */
 	void exitPara(EnquantoParser.ParaContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code defFuncao}
+	 * Enter a parse tree produced by the {@code repita}
 	 * labeled alternative in {@link EnquantoParser#comando}.
 	 * @param ctx the parse tree
 	 */
-	void enterDefFuncao(EnquantoParser.DefFuncaoContext ctx);
+	void enterRepita(EnquantoParser.RepitaContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code defFuncao}
+	 * Exit a parse tree produced by the {@code repita}
 	 * labeled alternative in {@link EnquantoParser#comando}.
 	 * @param ctx the parse tree
 	 */
-	void exitDefFuncao(EnquantoParser.DefFuncaoContext ctx);
+	void exitRepita(EnquantoParser.RepitaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code escolha}
+	 * labeled alternative in {@link EnquantoParser#comando}.
+	 * @param ctx the parse tree
+	 */
+	void enterEscolha(EnquantoParser.EscolhaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code escolha}
+	 * labeled alternative in {@link EnquantoParser#comando}.
+	 * @param ctx the parse tree
+	 */
+	void exitEscolha(EnquantoParser.EscolhaContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code leia}
 	 * labeled alternative in {@link EnquantoParser#expressao}.

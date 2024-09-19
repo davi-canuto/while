@@ -4,4 +4,4 @@ se nota>=6 entao
 senaose nota >= 2 entao
   exiba "Recuperacao"
 senao
-  exiba "Reprovado"
+  exiba "Reprovado";

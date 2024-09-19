@@ -7,6 +7,9 @@ import plp.enquanto.Linguagem.*;
 import plp.enquanto.parser.EnquantoBaseListener;
 import plp.enquanto.parser.EnquantoParser.*;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import static java.lang.Integer.parseInt;
 
 public class Regras extends EnquantoBaseListener {
@@ -38,10 +41,55 @@ public class Regras extends EnquantoBaseListener {
 
 	@Override
 	public void exitSe(SeContext ctx) {
-		final Bool condicao = valores.pegue(ctx.booleano());
+		final Bool condicao = valores.pegue(ctx.booleano(0));
+		final Map<Bool, Comando> senaoses = new HashMap<>();
+		
+		final int booleanoSize = ctx.booleano().size();
+		for (int i = 1; i < booleanoSize; i++) {
+			senaoses.put(
+			valores.pegue(ctx.booleano(i)),
+			valores.pegue(ctx.comando(i))
+			);
+		}
+		
 		final Comando entao = valores.pegue(ctx.comando(0));
-		final Comando senao = valores.pegue(ctx.comando(1));
-		valores.insira(ctx, new Se(condicao, entao, senao));
+		final Comando senao = valores.pegue(ctx.comando(ctx.comando().size() - 1));
+		valores.insira(ctx, new Se(condicao, entao, senaoses, senao));
+	}
+
+	public void exitPara(ParaContext ctx) {
+		valores.insira(ctx, new Para(
+			ctx.ID().getText(),
+			valores.pegue(ctx.expressao(0)),
+			valores.pegue(ctx.expressao(1)),
+			valores.pegue(ctx.comando())
+		));
+	}
+
+	@Override
+	public void exitRepita(RepitaContext ctx) {
+		valores.insira(ctx, new Repita(
+			valores.pegue(ctx.expressao()),
+			valores.pegue(ctx.comando())
+		));
+	}
+
+	@Override
+	public void exitEscolha(EscolhaContext ctx) {
+		final Id id = new Id(ctx.ID().getText());
+		final Map<Expressao, Comando> escolhas = new HashMap<>();
+		final int expressaoSize = ctx.expressao().size();
+		for (int i = 0; i < expressaoSize; i++) {
+			escolhas.put(
+				valores.pegue(ctx.expressao(i)),
+				valores.pegue(ctx.comando(i))
+			);
+		}
+		valores.insira(ctx, new Escolha(
+			id,
+			escolhas,
+			valores.pegue(ctx.comando(ctx.comando().size() - 1))
+		));
 	}
 
 	@Override
@@ -87,6 +135,21 @@ public class Regras extends EnquantoBaseListener {
 		final String id = ctx.ID().getText();
 		final Expressao exp = valores.pegue(ctx.expressao());
 		valores.insira(ctx, new Atribuicao(id, exp));
+	}
+
+	public void exitAtribuicaoComDeclaracao(AtribuicaoComDeclaracaoContext ctx) {
+		final ArrayList<String> ids = new ArrayList<String>();
+		final ArrayList<Expressao> expressoes = new ArrayList<Expressao>();
+
+		for (int i = 0; i < ctx.ID().size(); i++) {
+			ids.add(ctx.ID(i).getText());
+		}
+
+		for (int i = 0; i < ctx.expressao().size(); i++) {
+			expressoes.add(valores.pegue(ctx.expressao(i)));
+		}
+
+		valores.insira(ctx, new AtribuicaoComDeclaracao(ids, expressoes));
 	}
 
 	@Override
